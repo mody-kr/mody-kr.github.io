@@ -12,6 +12,7 @@
 <style>
 :root{--pink:#e6007a;--pink-ink:#9a0052;--light:#ffe3f0;--ink:#111;--soft:#5c5c5c;--well:#f3f3f3;--bg:#fff;--r:18px}
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{font-family:Pretendard,"Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);letter-spacing:-0.02em;line-height:1.5;font-size:17px}
 a{color:inherit}
@@ -91,6 +92,9 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
 .np-btns button:active{transform:scale(.97)}
 .done{margin:26px 20px;background:var(--light);border-radius:var(--r);padding:24px}
 .done h2{font-size:24px;color:var(--pink-ink)}
+.done .next{margin-top:18px;font-size:15px;color:#3a0020}
+.go-app{display:flex;align-items:center;justify-content:center;min-height:54px;margin-top:10px;border-radius:999px;background:var(--pink);color:#fff;font-weight:800;font-size:17px;text-decoration:none}
+.go-app:active{transform:scale(.98)}
 
 /* 아래: 질문, 개인정보 */
 .more{background:var(--well);padding:28px 20px 36px}
