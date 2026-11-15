@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>모디 헤어모델 모집</title>
+<meta name="description" content="근처 디자이너에게 무료 또는 재료비로 시술 받는 헤어모델을 모집해요. 모두의 디자이너, 모디.">
+<meta name="theme-color" content="#e6007a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--pink:#e6007a;--pink-ink:#9a0052;--light:#ffe3f0;--ink:#111;--soft:#5c5c5c;--well:#f3f3f3;--bg:#fff;--r:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Pretendard,"Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);letter-spacing:-0.02em;line-height:1.5;font-size:17px}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+/* 휴대폰 전용: PC에서도 가운데 휴대폰 너비 한 줄 */
+@media(min-width:520px){body{background:#ececee}}
+.app{max-width:480px;margin:0 auto;background:var(--bg);min-height:100vh;overflow:hidden}
+.pad{padding:0 20px}
+
+/* 머리: 연핑크 바탕, 진핑크 제목 (B안) */
+.hero{background:#ffe3f0;color:#3a0020;padding:18px 20px 50px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:7px;font-weight:900;font-size:19px;color:#e6007a;letter-spacing:-0.03em}
+.full{font-size:13px;font-weight:700;color:#9a0052}
+.hero h1{margin-top:30px;font-size:clamp(30px,12.4vw,52px);line-height:1.1;letter-spacing:-0.04em;font-weight:800;color:#c4006a;white-space:nowrap}
+.facts{margin-top:26px;display:grid;gap:12px}
+.facts div{display:grid;gap:1px}
+.facts dt{font-size:16px;font-weight:600;color:#111}
+.facts dd{font-size:14px;font-weight:400;color:#5a2840}
+#f{position:relative;margin-top:-24px;background:#fff;border-radius:24px 24px 0 0;padding-top:28px}
+::selection{background:#ffe3f0;color:#111}
+input{caret-color:#e6007a}
+/* 작업 사진 줄 (지금은 안 씀) */
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:18px}
+.shots img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block}
+
+/* 신청서 */
+form{display:grid;gap:24px;padding-top:26px;padding-bottom:28px}
+.q{display:grid;gap:8px}
+.q > label,.q legend,.lab{font-weight:800;font-size:17px}
+fieldset{border:0;display:grid;gap:8px}
+.hint{color:var(--soft);font-size:14px;font-weight:500}
+.req{color:var(--pink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input[type=text],input[type=tel]{width:100%;background:var(--well);border:2px solid transparent;border-radius:12px;padding:13px 14px;font-size:16px}
+input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:none;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip,.slot,.opt{position:relative}
+.chip input,.slot input,.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--well);font-weight:700;font-size:15px}
+.chip input:checked + span{background:var(--pink);color:#fff}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt span{display:flex;align-items:center;min-height:52px;height:100%;padding:10px 14px;border-radius:12px;background:var(--well);font-weight:700;font-size:15px;line-height:1.3;border:2px solid transparent}
+.opt input:checked + span{background:var(--pink);color:#fff}
+.chip input:focus-visible + span,.opt input:focus-visible + span,.slot input:focus-visible + span{outline:3px solid var(--pink);outline-offset:2px}
+/* 시간표: 열=평일·주말, 행=오전·오후·저녁 */
+.slots{display:grid;grid-template-columns:78px 1fr 1fr;gap:6px;align-items:center}
+.slots .h{font-size:15px;font-weight:800;text-align:center}
+.slots .d{font-size:15px;font-weight:800;line-height:1.2}
+.slots .d small{display:block;font-size:12px;font-weight:600;color:var(--soft)}
+.slot span{display:grid;place-items:center;min-height:46px;border-radius:12px;background:var(--well);font-size:14px;font-weight:700;color:var(--soft)}
+.slot input:checked + span{background:var(--pink);color:#fff}
+/* 사진 */
+.upload{display:flex;gap:12px;align-items:center}
+.upload input{position:absolute;width:1px;height:1px;opacity:0}
+.upload label{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+.upload input:focus-visible + label{outline:3px solid var(--pink);outline-offset:2px}
+.thumb{width:48px;height:64px;border-radius:10px;object-fit:cover}
+/* 동의 */
+.agree{background:var(--well);border-radius:var(--r);padding:14px 16px;display:grid;gap:10px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45}
+.check input{width:22px;height:22px;accent-color:var(--pink);flex:none}
+.check.all{font-size:16px;font-weight:800;padding-bottom:10px;border-bottom:1px solid #e2e2e2}
+.check a{color:var(--pink-ink);font-weight:700}
+.submit{min-height:58px;border:0;border-radius:999px;background:var(--pink);color:#fff;font-size:18px;font-weight:900;cursor:pointer}
+.submit:disabled{opacity:.6;cursor:wait}
+.submit:active{transform:scale(.98)}
+.err{color:#b00020;font-weight:700;font-size:15px}
+.nophoto{background:var(--light);border-radius:var(--r);padding:18px;display:grid;gap:6px}
+.nophoto b{font-size:17px;color:var(--pink-ink)}
+.nophoto p{font-size:15px;color:#3a0020}
+.np-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.np-btns button{min-height:48px;border-radius:999px;border:0;font-weight:800;font-size:15px;cursor:pointer}
+#np-add{background:var(--pink);color:#fff}
+#np-skip{background:#fff;color:var(--ink)}
+.np-btns button:active{transform:scale(.97)}
+.done{margin:26px 20px;background:var(--light);border-radius:var(--r);padding:24px}
+.done h2{font-size:24px;color:var(--pink-ink)}
+
+/* 아래: 질문, 개인정보 */
+.more{background:var(--well);padding:28px 20px 36px}
+.more h2{font-size:20px;font-weight:900;margin-bottom:8px}
+.more details{background:#fff;border-radius:14px;margin-top:8px}
+.more summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:15px;list-style:none}
+.more summary::-webkit-details-marker{display:none}
+.more summary:after{content:"+";float:right;font-weight:900;color:var(--pink)}
+.more details[open] summary:after{content:"–"}
+.more details p,.more details dl{padding:0 16px 14px;color:var(--soft);font-size:14px}
+.more dt{font-weight:800;color:var(--ink);margin-top:8px}
+.foot{display:flex;justify-content:space-between;align-items:center;padding:22px 20px 32px;font-size:13px;color:var(--soft)}
+.foot b{display:flex;gap:6px;align-items:center;font-size:18px;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="hero">
+  <div class="top"><span class="logo"><svg width="22" height="22" viewBox="0 0 256 256" aria-hidden="true"><path transform="translate(0 -16)" fill="#e6007a" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></svg>모디</span><span class="full">모두의 디자이너</span></div>
+  <h1>헤어모델 모집해요</h1>
+  <dl class="facts"><div><dt>무료 또는 재료비만</dt><dd>원하는 동네 디자이너에게 시술받아요</dd></div><div><dt>디자이너는 저희가 찾아요</dt><dd>신청하면 맞는 분을 찾아 연락드려요</dd></div><div><dt>날짜는 직접 정해요</dt><dd>조건이 안 맞으면 거절해도 괜찮아요</dd></div></dl>
+</header>
+
+<form id="f" class="pad" novalidate>
+  <div class="two">
+    <div class="q"><label for="name">이름 <span class="req">*</span></label><input type="text" id="name" name="name" autocomplete="nickname" maxlength="30" placeholder="닉네임도 돼요"></div>
+    <div class="q"><label for="contact">휴대폰 번호 <span class="req">*</span></label><input type="tel" id="contact" name="contact" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="010-0000-0000"></div>
+  </div>
+
+  <fieldset class="q">
+    <legend>성별 <span class="req">*</span></legend>
+    <div class="chips">
+      <label class="chip"><input type="radio" name="gender" value="여성"><span>여성</span></label>
+      <label class="chip"><input type="radio" name="gender" value="남성"><span>남성</span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="q">
+    <legend>시술 받으러 갈 수 있는 동네 <span class="req">*</span> <span class="hint">여러 개 가능</span></legend>
+    <div class="chips">
+      <label class="chip"><input type="checkbox" name="area" value="왕십리·행당"><span>왕십리·행당</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="성수·건대"><span>성수·건대</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="신촌·홍대"><span>신촌·홍대</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="강남·신사"><span>강남·신사</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="잠실"><span>잠실</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="종로·을지로"><span>종로·을지로</span></label>
+      <label class="chip"><input type="checkbox" name="area" value="기타" id="area-etc"><span>기타</span></label>
+    </div>
+    <input type="text" id="area-other" maxlength="40" placeholder="동네 이름 (예: 노원, 부천)" aria-label="기타 동네" hidden>
+  </fieldset>
+
+  <fieldset class="q">
+    <legend>원하는 시술 <span class="req">*</span> <span class="hint">여러 개 가능</span></legend>
+    <div class="chips">
+      <label class="chip"><input type="checkbox" name="menu" value="커트"><span>커트</span></label>
+      <label class="chip"><input type="checkbox" name="menu" value="펌"><span>펌</span></label>
+      <label class="chip"><input type="checkbox" name="menu" value="염색·탈색"><span>염색·탈색</span></label>
+      <label class="chip"><input type="checkbox" name="menu" value="디자이너 추천"><span>추천해 주세요</span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="q">
+    <legend>가능한 시간 <span class="req">*</span> <span class="hint">되는 칸 모두</span></legend>
+    <div class="slots">
+      <span></span><span class="h">평일</span><span class="h">주말</span>
+      <span class="d">오전<small>10–13시</small></span>
+      <label class="slot"><input type="checkbox" name="time" value="평일 오전" aria-label="평일 오전"><span>가능</span></label>
+      <label class="slot"><input type="checkbox" name="time" value="주말 오전" aria-label="주말 오전"><span>가능</span></label>
+      <span class="d">오후<small>13–18시</small></span>
+      <label class="slot"><input type="checkbox" name="time" value="평일 오후" aria-label="평일 오후"><span>가능</span></label>
+      <label class="slot"><input type="checkbox" name="time" value="주말 오후" aria-label="주말 오후"><span>가능</span></label>
+      <span class="d">저녁<small>18–21시</small></span>
+      <label class="slot"><input type="checkbox" name="time" value="평일 저녁" aria-label="평일 저녁"><span>가능</span></label>
+      <label class="slot"><input type="checkbox" name="time" value="주말 저녁" aria-label="주말 저녁"><span>가능</span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="q">
+    <legend>재료비 <span class="req">*</span></legend>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="cost" value="재료비 가능"><span>재료비 정도는 괜찮아요</span></label>
+      <label class="opt"><input type="radio" name="cost" value="무료만"><span>무료일 때만</span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="q">
+    <legend>시술 사진에 얼굴 <span class="req">*</span></legend>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="face" value="얼굴 공개 가능"><span>나와도 괜찮아요</span></label>
+      <label class="opt"><input type="radio" name="face" value="뒷모습·옆모습만"><span>뒷모습·옆모습만</span></label>
+    </div>
+    <p class="hint" id="face-note" hidden>디자이너 연결이 늦어질 수 있어요</p>
+  </fieldset>
+
+  <div class="q">
+    <span class="lab">지금 머리 사진</span>
+    <div class="upload">
+      <input type="file" id="photo" accept="image/*">
+      <label for="photo">사진 고르기</label>
+      <img class="thumb" id="thumb" alt="고른 사진 미리보기" hidden>
+    </div>
+  </div>
+
+  <div class="agree">
+    <label class="check all"><input type="checkbox" id="all"><span>모두 동의해요</span></label>
+    <label class="check"><input type="checkbox" id="c1" class="c"><span>[필수] 개인정보 수집·이용 (만 14세 이상) <a href="#privacy">보기</a></span></label>
+    <label class="check"><input type="checkbox" id="c2" class="c"><span>[필수] 연결할 디자이너 한 분에게 신청 내용 전달 <a href="#privacy">보기</a></span></label>
+    <label class="check"><input type="checkbox" id="c3" class="c"><span>[필수] 시술 사진을 모디 인스타·앱에 소개 (위 얼굴 공개 범위 안에서)</span></label>
+    <p class="hint">헤어모델은 시술 사진 촬영·게시에 동의해야 진행할 수 있어요.</p>
+  </div>
+
+  <p class="err" id="err" role="alert" hidden></p>
+  <div class="nophoto" id="nophoto" role="alert" hidden>
+    <b>머리 사진이 아직 없어요</b>
+    <p>사진이 없으면 디자이너 연결이 어려울 수 있어요.<br>그래도 신청할까요?</p>
+    <div class="np-btns">
+      <button type="button" id="np-add">사진 올리기</button>
+      <button type="button" id="np-skip">그냥 신청하기</button>
+    </div>
+  </div>
+  <button class="submit" type="submit" id="send">신청하기</button>
+</form>
+
+<div class="done" id="done" hidden tabindex="-1">
+  <h2>신청됐어요!</h2>
+  <p style="margin-top:8px">맞는 디자이너를 찾으면 적어 주신 번호로 연락드릴게요.</p>
+</div>
+
+<section class="more" aria-labelledby="faq">
+  <h2 id="faq">궁금한 점</h2>
+  <details><summary>정말 무료예요?</summary><p>디자이너마다 달라요. 펌·염색처럼 약이 드는 시술은 재료비를 받는 곳도 있어요. 재료비를 골라 주시면 그 조건에 맞는 디자이너만 연결하고, 금액은 연결 전에 먼저 알려 드려요.</p></details>
+  <details><summary>신청하면 꼭 해야 하나요?</summary><p>아니요. 연락받고 조건이 안 맞으면 거절하셔도 돼요.</p></details>
+  <details id="privacy"><summary>개인정보는 어떻게 쓰여요?</summary>
+    <dl>
+      <dt>모으는 정보</dt><dd>이름(닉네임), 휴대폰 번호, 성별, 갈 수 있는 동네, 원하는 시술, 가능한 시간, 재료비·얼굴 공개 선택, 머리 사진(올린 경우)</dd>
+      <dt>쓰는 곳</dt><dd>헤어모델과 디자이너 연결, 연결 관련 연락, 시술 사진 게시 (고른 얼굴 공개 범위 안에서)</dd>
+      <dt>전달받는 곳</dt><dd>연결할 디자이너 한 분 (연결이 정해졌을 때만, 필요한 정보만)</dd>
+      <dt>보관 기간</dt><dd>모집 종료 후 6개월 안에 삭제. 요청하면 바로 삭제</dd>
+      <dt>동의하지 않으면</dt><dd>필수 항목에 동의하지 않으면 헤어모델로 참여할 수 없어요. 이미 올라간 사진도 내려 달라고 하면 내려 드려요</dd>
+      <dt>문의·삭제 요청</dt><dd>mody.kor.official@gmail.com · 인스타 DM @mody_kor</dd>
+    </dl>
+  </details>
+</section>
+
+<footer class="foot">
+  <b><svg width="22" height="22" viewBox="0 0 256 256" aria-hidden="true"><path transform="translate(0 -16)" fill="#e6007a" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></svg>모디</b>
+  <span>@mody_kor</span>
+</footer>
+</div>
+
+<script>
+// 구글 Apps Script 웹 앱 주소. 비어 있으면 테스트 모드(저장 안 함).
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwBV0eGO_sPg-FHCkBYIRg9FN-jtKSmzaIJwCRS6GUgW4D5IcE2WuQxtY1ASztlwK-SEg/exec';
+
+const $ = s => document.querySelector(s);
+const form = $('#f'), err = $('#err'), send = $('#send');
+const from = new URLSearchParams(location.search).get('from') || 'direct';
+
+$('#np-add').addEventListener('click', () => $('#photo').click());
+$('#np-skip').addEventListener('click', () => { noPhotoOk = true; $('#nophoto').hidden = true; form.requestSubmit(); });
+
+// 휴대폰 번호: 숫자만 받아 010-0000-0000 모양으로
+const fmtPhone = v => { const n = v.replace(/\D/g, '').slice(0, 11); return n.length < 4 ? n : n.length < 8 ? `${n.slice(0, 3)}-${n.slice(3)}` : `${n.slice(0, 3)}-${n.slice(3, 7)}-${n.slice(7)}`; };
+const okPhone = v => /^01[016789]-?\d{3,4}-?\d{4}$/.test(v);
+$('#contact').addEventListener('input', e => e.target.value = fmtPhone(e.target.value));
+$('#area-etc').addEventListener('change', e => { $('#area-other').hidden = !e.target.checked; if (e.target.checked) $('#area-other').focus(); });
+form.querySelectorAll('[name=face]').forEach(r => r.addEventListener('change', () => $('#face-note').hidden = !(r.checked && r.value === '뒷모습·옆모습만')));
+
+// 모두 동의 ↔ 개별 동의
+const cs = [...document.querySelectorAll('.c')];
+$('#all').addEventListener('change', e => cs.forEach(c => c.checked = e.target.checked));
+cs.forEach(c => c.addEventListener('change', () => $('#all').checked = cs.every(x => x.checked)));
+// 개인정보 '보기' 누르면 아래 안내를 펼침
+document.querySelectorAll('a[href="#privacy"]').forEach(a => a.addEventListener('click', () => $('#privacy').open = true));
+
+let photo = null; // { name, type, data(base64) }
+let noPhotoOk = false; // 사진 없이 신청하겠다고 한 번 고르면 true
+$('#photo').addEventListener('change', async e => {
+  const file = e.target.files[0]; photo = null; $('#thumb').hidden = true;
+  if (!file) return;
+  if (!file.type.startsWith('image/')) return showErr('사진 파일만 올릴 수 있어요.');
+  try {
+    photo = await shrink(file, 1280, 0.85);
+    $('#thumb').src = 'data:image/jpeg;base64,' + photo.data; $('#thumb').hidden = false; err.hidden = true; $('#nophoto').hidden = true;
+  } catch { showErr('사진을 읽지 못했어요. 다른 사진으로 해 주세요.'); }
+});
+
+// 긴 변을 max px로 줄인 JPEG(base64). 전송량을 줄이려고.
+function shrink(file, max, q) {
+  return new Promise((ok, bad) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+      ok({ name: file.name.replace(/\.\w+$/, '') + '.jpg', type: 'image/jpeg', data: c.toDataURL('image/jpeg', q).split(',')[1] });
+    };
+    img.onerror = bad; img.src = url;
+  });
+}
+
+function showErr(msg, focusEl) { err.textContent = msg; err.hidden = false; if (focusEl) focusEl.focus(); }
+const vals = n => [...form.querySelectorAll(`[name="${n}"]:checked`)].map(i => i.value);
+
+// 빈 필수 항목이 있으면 [메시지, 포커스할 요소], 없으면 null
+function check(d) {
+  if (!d.name) return ['이름을 적어 주세요.', $('#name')];
+  if (!okPhone(d.contact)) return ['휴대폰 번호를 010-0000-0000 모양으로 적어 주세요.', $('#contact')];
+  if (!d.gender) return ['성별을 골라 주세요.', form.gender[0]];
+  if (!d.area.length) return ['갈 수 있는 동네를 하나 이상 골라 주세요.', form.area[0]];
+  if ($('#area-etc').checked && !$('#area-other').value.trim()) return ['기타 동네 이름을 적어 주세요.', $('#area-other')];
+  if (!d.menu.length) return ['원하는 시술을 하나 이상 골라 주세요.', form.menu[0]];
+  if (!d.time.length) return ['가능한 시간을 하나 이상 골라 주세요.', form.time[0]];
+  if (!d.cost) return ['재료비 조건을 골라 주세요.', form.cost[0]];
+  if (!d.face) return ['얼굴 공개 여부를 골라 주세요.', form.face[0]];
+  if (!d.agreeCollect || !d.agreeShare || !d.agreePost) return ['필수 동의 세 개에 모두 체크해 주세요.', $('#c1')];
+  return null;
+}
+
+form.addEventListener('submit', async e => {
+  e.preventDefault(); err.hidden = true;
+  const d = {
+    name: $('#name').value.trim(), contact: $('#contact').value.trim(),
+    gender: vals('gender')[0] || '', area: vals('area').map(a => a === '기타' ? '기타: ' + $('#area-other').value.trim() : a), menu: vals('menu'), time: vals('time'),
+    cost: vals('cost')[0] || '', face: vals('face')[0] || '',
+    agreeCollect: $('#c1').checked, agreeShare: $('#c2').checked, agreePost: $('#c3').checked,
+    from, photo,
+  };
+  const bad = check(d); if (bad) return showErr(...bad);
+  if (!d.photo && !noPhotoOk) { $('#nophoto').hidden = false; $('#nophoto').scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
+  send.disabled = true; send.textContent = '보내는 중…';
+  try {
+    if (ENDPOINT) {
+      // text/plain이면 Apps Script에 CORS 사전 요청 없이 보낼 수 있음
+      const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(d) });
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.error || 'fail');
+    } else {
+      console.log('[모디 테스트 모드] 보낼 내용', { ...d, photo: d.photo ? `${d.photo.name} (${Math.round(d.photo.data.length * 0.75 / 1024)}KB)` : null });
+      window.__lastSubmit = d;
+    }
+    form.hidden = true; $('#done').hidden = false; $('#done').focus();
+  } catch {
+    showErr('보내지 못했어요. 잠시 뒤 다시 눌러 주세요. 계속 안 되면 인스타 DM @mody_kor 로 알려 주세요.');
+  } finally { send.disabled = false; send.textContent = '신청하기'; }
+});
+</script>
+</body>
+</html>
