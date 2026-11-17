@@ -26,7 +26,7 @@ button,input{font:inherit;color:inherit}
 /* 머리: 연핑크 바탕, 진핑크 제목 (B안) */
 .hero{background:#ffe3f0;color:#3a0020;padding:18px 20px 50px}
 .top{display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center;gap:7px;font-weight:900;font-size:19px;color:#e6007a;letter-spacing:-0.03em}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:19px;color:var(--ink);letter-spacing:-0.03em}
 .full{font-size:13px;font-weight:700;color:#9a0052}
 .hero h1{margin-top:30px;font-size:clamp(30px,12.4vw,52px);line-height:1.1;letter-spacing:-0.04em;font-weight:800;color:#c4006a;white-space:nowrap}
 .facts{margin-top:26px;display:grid;gap:12px}
@@ -94,6 +94,7 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
 .done h2{font-size:24px;color:var(--pink-ink)}
 .done .next{margin-top:18px;font-size:15px;color:#3a0020}
 .go-app{display:flex;align-items:center;justify-content:center;min-height:54px;margin-top:10px;border-radius:999px;background:var(--pink);color:#fff;font-weight:800;font-size:17px;text-decoration:none}
+.peek{justify-self:center;margin-top:-12px;padding:10px 4px;color:var(--soft);font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .go-app:active{transform:scale(.98)}
 
 /* 아래: 질문, 개인정보 */
@@ -115,7 +116,7 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
 <div class="app">
 
 <header class="hero">
-  <div class="top"><span class="logo"><svg width="22" height="22" viewBox="0 0 256 256" aria-hidden="true"><path transform="translate(0 -16)" fill="#e6007a" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></svg>모디</span><span class="full">모두의 디자이너</span></div>
+  <div class="top"><span class="logo"><svg width="26" height="26" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="57.6" fill="#e6007a"/><g transform="translate(17.92 17.92) scale(.86)"><path transform="translate(0 -16.0)" fill="#ffffff" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></g></svg>모디</span><span class="full">모두의 디자이너</span></div>
   <h1>헤어모델 모집해요</h1>
   <dl class="facts"><div><dt>무료 또는 재료비만</dt><dd>원하는 동네 디자이너에게 시술받아요</dd></div><div><dt>디자이너는 저희가 찾아요</dt><dd>신청하면 맞는 분을 찾아 연락드려요</dd></div><div><dt>날짜는 직접 정해요</dt><dd>조건이 안 맞으면 거절해도 괜찮아요</dd></div></dl>
 </header>
@@ -218,11 +219,14 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
     </div>
   </div>
   <button class="submit" type="submit" id="send">신청하기</button>
+  <a class="peek" id="peek" href="app/">신청 전에 모디 먼저 둘러보기 →</a>
 </form>
 
 <div class="done" id="done" hidden tabindex="-1">
-  <h2>신청됐어요!</h2>
+  <h2>신청 완료!</h2>
   <p style="margin-top:8px">맞는 디자이너를 찾으면 적어 주신 번호로 연락드릴게요.</p>
+  <p class="next">기다리는 동안 볼 수 있게 모디로 이동하고 있어요…</p>
+  <a class="go-app" id="go-app" href="app/">바로 가기</a>
 </div>
 
 <section class="more" aria-labelledby="faq">
@@ -231,8 +235,8 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
   <details><summary>신청하면 꼭 해야 하나요?</summary><p>아니요. 연락받고 조건이 안 맞으면 거절하셔도 돼요.</p></details>
   <details id="privacy"><summary>개인정보는 어떻게 쓰여요?</summary>
     <dl>
-      <dt>모으는 정보</dt><dd>이름(닉네임), 휴대폰 번호, 성별, 갈 수 있는 동네, 원하는 시술, 가능한 시간, 재료비·얼굴 공개 선택, 머리 사진(올린 경우)</dd>
-      <dt>쓰는 곳</dt><dd>헤어모델과 디자이너 연결, 연결 관련 연락, 시술 사진 게시 (고른 얼굴 공개 범위 안에서)</dd>
+      <dt>모으는 정보</dt><dd>이름(닉네임), 휴대폰 번호, 성별, 갈 수 있는 동네, 원하는 시술, 가능한 시간, 재료비·얼굴 공개 선택, 머리 사진(올린 경우), 신청 뒤 모디 둘러보기에서 본 사진·저장한 사진·누른 버튼 기록</dd>
+      <dt>쓰는 곳</dt><dd>헤어모델과 디자이너 연결(둘러보기 기록은 어떤 머리를 좋아하는지 참고), 연결 관련 연락, 시술 사진 게시 (고른 얼굴 공개 범위 안에서)</dd>
       <dt>전달받는 곳</dt><dd>연결할 디자이너 한 분 (연결이 정해졌을 때만, 필요한 정보만)</dd>
       <dt>보관 기간</dt><dd>모집 종료 후 6개월 안에 삭제. 요청하면 바로 삭제</dd>
       <dt>동의하지 않으면</dt><dd>필수 항목에 동의하지 않으면 헤어모델로 참여할 수 없어요. 이미 올라간 사진도 내려 달라고 하면 내려 드려요</dd>
@@ -242,7 +246,7 @@ input[type=text]:focus,input[type=tel]:focus{border-color:var(--pink);outline:no
 </section>
 
 <footer class="foot">
-  <b><svg width="22" height="22" viewBox="0 0 256 256" aria-hidden="true"><path transform="translate(0 -16)" fill="#e6007a" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></svg>모디</b>
+  <b><svg width="26" height="26" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="57.6" fill="#e6007a"/><g transform="translate(17.92 17.92) scale(.86)"><path transform="translate(0 -16.0)" fill="#ffffff" fill-rule="evenodd" d="M64 118 A64 64 0 0 1 192 118 V118 C192 126.59 200.52 135.18 200.53 143.77 C200.54 158.49 188.28 173.21 188.28 187.92 C188.28 197.28 193.67 206.64 200 216 Q200 228 188 228 H143 V184.39 C154.91 178.3 163 165.15 163 150 V114 H93 V150 C93 165.15 101.09 178.3 113 184.39 V228 H68 Q56 228 56 216 C62.33 206.64 67.72 197.28 67.72 187.92 C67.72 173.21 55.46 158.49 55.47 143.77 C55.48 135.18 64 126.59 64 118 V118 Z"/></g></svg>모디</b>
   <span>@mody_kor</span>
 </footer>
 </div>
@@ -254,6 +258,12 @@ const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwBV0eGO_sPg-FHCkBYIRg
 const $ = s => document.querySelector(s);
 const form = $('#f'), err = $('#err'), send = $('#send');
 const from = new URLSearchParams(location.search).get('from') || 'direct';
+const appUrl = 'app/?from=' + encodeURIComponent(from) + '&applied=1'; // 둘러보기도 어디서 왔는지 이어서
+$('#go-app').href = appUrl;
+$('#peek').href = 'app/?from=' + encodeURIComponent(from); // applied 없음 = 신청 안 하고 구경
+// 방문자 ID: 신청서와 둘러보기 앱의 행동 기록을 같은 사람으로 묶음 (같은 사이트라 앱도 같은 값을 읽음)
+let uid = 'no-storage';
+try { uid = localStorage.getItem('mody_uid') || (crypto.randomUUID ? crypto.randomUUID() : Date.now() + Math.random().toString(36).slice(2)); localStorage.setItem('mody_uid', uid); } catch {}
 
 $('#np-add').addEventListener('click', () => $('#photo').click());
 $('#np-skip').addEventListener('click', () => { noPhotoOk = true; $('#nophoto').hidden = true; form.requestSubmit(); });
@@ -322,7 +332,7 @@ form.addEventListener('submit', async e => {
     name: $('#name').value.trim(), contact: $('#contact').value.trim(),
     gender: vals('gender')[0] || '', area: vals('area').map(a => a === '기타' ? '기타: ' + $('#area-other').value.trim() : a), menu: vals('menu'), time: vals('time'),
     cost: vals('cost')[0] || '', face: vals('face')[0] || '',
-    agreeCollect: $('#c1').checked, agreeShare: $('#c2').checked, agreePost: $('#c3').checked,
+    agreeCollect: $('#c1').checked, agreeShare: $('#c2').checked, agreePost: $('#c3').checked, uid,
     from, photo,
   };
   const bad = check(d); if (bad) return showErr(...bad);
@@ -338,7 +348,8 @@ form.addEventListener('submit', async e => {
       console.log('[모디 테스트 모드] 보낼 내용', { ...d, photo: d.photo ? `${d.photo.name} (${Math.round(d.photo.data.length * 0.75 / 1024)}KB)` : null });
       window.__lastSubmit = d;
     }
-    form.hidden = true; $('#done').hidden = false; $('#done').focus();
+    // 완료 안내는 앱 피드 위 시트에서만 보여 줌. replace라 뒤로 가기로 신청서에 돌아와 중복 신청하지 않음
+    location.replace(appUrl);
   } catch {
     showErr('보내지 못했어요. 잠시 뒤 다시 눌러 주세요. 계속 안 되면 인스타 DM @mody_kor 로 알려 주세요.');
   } finally { send.disabled = false; send.textContent = '신청하기'; }
